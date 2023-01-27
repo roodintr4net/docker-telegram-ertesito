@@ -30,7 +30,7 @@ async function sendEventStream() {
 
 async function sendVersion() {
   const version = await docker.version();
-  let text = `Connected to docker ${version.Version}`;
+  let text = `Csatlakozva az alábbi verziószamu Docker Sockethez: ${version.Version}`;
   console.log(text, "\n");
   await telegram.send(text);
 }
@@ -45,7 +45,7 @@ async function healthcheck() {
     await docker.version();
   } catch (e) {
     console.error(e);
-    console.error("Docker is unavailable");
+    console.error("Docker nem elérhető!");
     process.exit(101);
   }
 
@@ -53,11 +53,11 @@ async function healthcheck() {
     console.log(await telegram.check());
   } catch (e) {
     console.error(e);
-    console.error("Telegram API is unavailable");
+    console.error("Telegram API nem elérhető!");
     process.exit(102);
   }
 
-  console.log("OK");
+  console.log("Ok!");
   process.exit(0);
 }
 
